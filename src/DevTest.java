@@ -9,6 +9,7 @@ public class DevTest
         int age = 0;
         int favNum = 0;
         double salary = 0;
+        double constrained = 0; // must between 100 and 10000
         /*
 
         firstName = getNonZeroLenString(in, "Enter your first name");
@@ -24,9 +25,13 @@ public class DevTest
         System.out.println("Salary is " + salary);
 
 
-         */
+
             favNum = getRangedInt(in, "Enter your favorite number", 1, 10);
             System.out.println("Fav num is " + favNum);
+
+         */
+        constrained = getRangedDouble(in, "Enter the constrained double", 100, 10000);
+        System.out.println("Constrained is " + constrained);
     }
 
 
@@ -165,4 +170,51 @@ public class DevTest
 
         return retVal;
     }
+
+    /**
+     * Gets an integer from the user via the console within a specified range
+     *
+     *
+     * @param pipe the scanner to use for input
+     * @param prompt the prompt to tell the user what is required
+     * @param low the inclusive low bound
+     * @param high the inclusive high bound
+     * @return a double within the specified bounds
+     */
+
+
+    public static double getRangedDouble(Scanner pipe, String prompt, double low, double high)
+    {
+        double retVal = 0;
+        boolean done = false;
+        String trash = "";
+
+        do
+        {
+            System.out.print(prompt + " [" + low + " - " + high + "]: ");
+            if(pipe.hasNextDouble()) {
+                retVal = pipe.nextDouble();
+                pipe.nextLine();
+                if (retVal >= low && retVal <= high)
+                {
+                    done = true;
+                }
+                else
+                {
+                    System.out.println("You must enter a value within the range [" + low + " - " + high + "]: ");
+                }
+            }
+            else
+            {
+                trash = pipe.nextLine();
+                System.out.println("You must enter a valid double not " + trash);
+            }
+
+
+
+        }while(!done);
+
+        return retVal;
+    }
+
 }
