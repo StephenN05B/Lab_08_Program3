@@ -236,5 +236,46 @@ public class SafeInput2
         return retVal;
     }
 
-}
+        /**
+         * Prints a pretty header with a centered message.
+         *
+         * @param msg The message to center in the header
+         */
+        public static void prettyHeader(String msg) {
+            final int totalWidth = 60;
+            final int padding = 3; // Number of asterisks on either side
+            int messageLength = msg.length();
+
+            int availableWidth = totalWidth - 2 * padding; // Minus padding for asterisks
+            String formattedMsg;
+
+            if (messageLength > availableWidth) {
+                formattedMsg = msg.substring(0, availableWidth - 3) + "..."; // Truncate with ellipsis
+            } else {
+                int spacesBefore = (availableWidth - messageLength) / 2;
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < spacesBefore; i++) {
+                    sb.append(" ");
+                }
+                formattedMsg = sb.toString() + msg;
+            }
+
+            for (int i = 0; i < totalWidth; i++) {
+                System.out.print("*");
+            }
+            System.out.println();
+
+            System.out.print("***");
+            System.out.print(formattedMsg);
+            System.out.println("                         ***");
+
+
+            for (int i = 0; i < totalWidth; i++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+
 
